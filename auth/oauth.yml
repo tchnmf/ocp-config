@@ -1,5 +1,17 @@
 # https://docs.openshift.com/container-platform/4.8/authentication/identity_providers/configuring-htpasswd-identity-provider.html
 
+
+# Secret object that contains the HTPasswd users file:
+apiVersion: v1
+kind: Secret
+metadata:
+  name: htpass-secret
+  namespace: openshift-config
+type: Opaque
+data:
+  htpasswd: ${HTPASSWD_BASE64}                        # <base64_encoded_htpasswd_file_contents>
+
+
 # HTPasswd custom resource (CR) 
 apiVersion: config.openshift.io/v1
 kind: OAuth
